@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <!-- Disable the given check in this project -->
+    <issue id="LocaleFolder" severity="ignore" />
+    <issue id="MissingTranslation" severity="ignore" />
+    <issue id="ImpliedQuantity" severity="ignore" />
+    <issue id="IconDensities" severity="ignore" />
+</lint>
