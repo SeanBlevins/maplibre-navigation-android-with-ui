@@ -22,11 +22,9 @@ import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
 import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.location.LocationComponent
 import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions
-import com.mapbox.mapboxsdk.location.engine.LocationEngineCallback
-import com.mapbox.mapboxsdk.location.engine.LocationEngineRequest
-import com.mapbox.mapboxsdk.location.engine.LocationEngineResult
 import com.mapbox.mapboxsdk.location.modes.CameraMode
 import com.mapbox.mapboxsdk.location.modes.RenderMode
+import com.mapbox.mapboxsdk.maps.MapView
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback
 import com.mapbox.mapboxsdk.maps.Style
@@ -39,7 +37,6 @@ import com.mapbox.services.android.navigation.v5.routeprogress.ProgressChangeLis
 import com.mapbox.services.android.navigation.v5.routeprogress.RouteProgress
 import com.mapbox.turf.TurfConstants
 import com.mapbox.turf.TurfMeasurement
-import kotlinx.android.synthetic.main.activity_mock_navigation.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -62,11 +59,24 @@ class MockNavigationActivity : AppCompatActivity(), OnMapReadyCallback,
     private var waypoint: Point? = null
     private var locationComponent: LocationComponent? = null
 
+    private var mapView: MapView? = null
+    private var startRouteButton: View? = null
+    private var newLocationFab: View? = null
+    private var clearPoints: View? = null
+
+
     @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mock_navigation)
-        mapView.apply {
+
+        mapView = findViewById(R.id.mapView)
+        startRouteButton = findViewById(R.id.startRouteButton)
+        newLocationFab = findViewById(R.id.newLocationFab)
+        clearPoints = findViewById(R.id.clearPoints)
+
+
+        mapView?.apply {
             onCreate(savedInstanceState)
             getMapAsync(this@MockNavigationActivity)
         }
@@ -96,9 +106,9 @@ class MockNavigationActivity : AppCompatActivity(), OnMapReadyCallback,
             customNotification.register(MyBroadcastReceiver(navigation), context)
         }
 
-        startRouteButton.setOnClickListener {
+        startRouteButton?.setOnClickListener {
             route?.let { route ->
-                startRouteButton.visibility = View.INVISIBLE
+                it.visibility = View.INVISIBLE
 
                 // Attach all of our navigation listeners.
                 navigation.apply {
@@ -118,11 +128,11 @@ class MockNavigationActivity : AppCompatActivity(), OnMapReadyCallback,
             }
         }
 
-        newLocationFab.setOnClickListener {
+        newLocationFab?.setOnClickListener {
             newOrigin()
         }
 
-        clearPoints.setOnClickListener {
+        clearPoints?.setOnClickListener {
             if (::mapboxMap.isInitialized)
                 mapboxMap.markers.forEach {
                     mapboxMap.removeMarker(it)
@@ -141,7 +151,7 @@ class MockNavigationActivity : AppCompatActivity(), OnMapReadyCallback,
             enableLocationComponent(style)
         }
 
-        navigationMapRoute = NavigationMapRoute(navigation, mapView, mapboxMap)
+        navigationMapRoute = mapView?.let { NavigationMapRoute(navigation, it, mapboxMap) }
 
         mapboxMap.addOnMapClickListener(this)
         Snackbar.make(findViewById(R.id.container), "Tap map to place waypoint", Snackbar.LENGTH_LONG).show()
@@ -185,9 +195,9 @@ class MockNavigationActivity : AppCompatActivity(), OnMapReadyCallback,
 
         if (addMarker)
             mapboxMap.addMarker(MarkerOptions().position(point))
-        clearPoints.visibility = View.VISIBLE
+        clearPoints?.visibility = View.VISIBLE
 
-        startRouteButton.visibility = View.VISIBLE
+        startRouteButton?.visibility = View.VISIBLE
         calculateRoute()
         return true
     }
@@ -207,7 +217,7 @@ class MockNavigationActivity : AppCompatActivity(), OnMapReadyCallback,
 
         val origin = Point.fromLngLat(userLocation.longitude, userLocation.latitude)
         if (TurfMeasurement.distance(origin, destination, TurfConstants.UNIT_METERS) < 50) {
-            startRouteButton.visibility = View.GONE
+            startRouteButton?.visibility = View.GONE
             return
         }
 
@@ -263,27 +273,27 @@ class MockNavigationActivity : AppCompatActivity(), OnMapReadyCallback,
 
     override fun onResume() {
         super.onResume()
-        mapView.onResume()
+        mapView?.onResume()
     }
 
     override fun onPause() {
         super.onPause()
-        mapView.onPause()
+        mapView?.onPause()
     }
 
     override fun onStart() {
         super.onStart()
-        mapView.onStart()
+        mapView?.onStart()
     }
 
     override fun onStop() {
         super.onStop()
-        mapView.onStop()
+        mapView?.onStop()
     }
 
     override fun onLowMemory() {
         super.onLowMemory()
-        mapView.onLowMemory()
+        mapView?.onLowMemory()
     }
 
     override fun onDestroy() {
@@ -292,12 +302,12 @@ class MockNavigationActivity : AppCompatActivity(), OnMapReadyCallback,
         if (::mapboxMap.isInitialized) {
             mapboxMap.removeOnMapClickListener(this)
         }
-        mapView.onDestroy()
+        mapView?.onDestroy()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        mapView.onSaveInstanceState(outState)
+        mapView?.onSaveInstanceState(outState)
     }
 
 

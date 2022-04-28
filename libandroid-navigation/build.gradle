@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion androidVersions.compileSdkVersion
@@ -41,24 +40,21 @@ android {
 }
 
 dependencies {
+    // AutoValues
+    api "com.google.auto.value:auto-value-annotations:1.9"
+    annotationProcessor "com.google.auto.value:auto-value:1.9"
+
     api dependenciesList.mapLibreServices
     api dependenciesList.mapLibreTurf
-    implementation(dependenciesList.mapLibre){
-        exclude group: 'com.mapbox.mapboxsdk', module: 'mapbox-sdk-geojson'
-        exclude group: 'com.mapbox.mapboxsdk', module: 'mapbox-sdk-turf'
-    }
+    api dependenciesList.mapLibre
 
-    compileOnly dependenciesList.gmsLocation
+    implementation dependenciesList.gmsLocation
 
     // Support
     implementation dependenciesList.supportAppcompatV7
 
     // Logging
     implementation dependenciesList.timber
-
-    // AutoValues
-    annotationProcessor dependenciesList.autoValue
-    compileOnly dependenciesList.autoValue
 
     // Unit testing
     testImplementation dependenciesList.junit
@@ -71,7 +67,6 @@ dependencies {
 }
 
 apply from: 'javadoc.gradle'
-apply from: "${rootDir}/gradle/mvn-push-android.gradle"
 apply from: "${rootDir}/gradle/checkstyle.gradle"
 apply from: "${rootDir}/gradle/dependencies-graph.gradle"
 apply from: "${rootDir}/gradle/dependency-updates.gradle"

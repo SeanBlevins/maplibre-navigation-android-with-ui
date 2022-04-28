@@ -1,14 +1,13 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion androidVersions.compileSdkVersion
     buildToolsVersion androidVersions.buildToolsVersion
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 
     defaultConfig {
@@ -42,48 +41,40 @@ android {
 }
 
 dependencies {
-    // Flitsmeister Navigation SDK
-    implementation project(':libandroid-navigation')
-    implementation(dependenciesList.mapLibre){
-        exclude group: 'com.mapbox.mapboxsdk', module: 'mapbox-sdk-geojson'
-        exclude group: 'com.mapbox.mapboxsdk', module: 'mapbox-sdk-turf'
-    }
+    implementation project(':libandroid-navigation-ui')
 
     // Support libraries
     implementation dependenciesList.supportAppcompatV7
-    implementation dependenciesList.supportDesign
-    implementation dependenciesList.supportRecyclerView
+    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation dependenciesList.supportConstraintLayout
     implementation dependenciesList.supportCardView
-    implementation dependenciesList.lifecycleExtensions
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
-    implementation dependenciesList.gmsLocation
 
     // Logging
     implementation dependenciesList.timber
 
     // Butter Knife
-    implementation 'com.jakewharton:butterknife:10.0.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'com.jakewharton:butterknife:10.2.3'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
 
     // Leak Canary
     debugImplementation dependenciesList.leakCanaryDebug
-    releaseImplementation dependenciesList.leakCanaryRelease
-    androidTestImplementation dependenciesList.leakCanaryTest
 
     // Unit Testing
     testImplementation dependenciesList.junit
     testImplementation dependenciesList.mockito
 
     // Instrumentation testing
-    androidTestImplementation dependenciesList.testRules
-    androidTestImplementation(dependenciesList.testEspressoCore, {
+    androidTestImplementation 'androidx.test:rules:1.4.0'
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.4.0', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-  compile "androidx.core:core-ktx:+"
-  compile "androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0"
+    implementation "androidx.core:core-ktx:1.7.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     implementation 'androidx.multidex:multidex:2.0.1'

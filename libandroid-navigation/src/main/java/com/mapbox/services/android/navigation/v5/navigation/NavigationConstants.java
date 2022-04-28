@@ -17,6 +17,33 @@ public final class NavigationConstants {
   }
 
   /**
+   * Defines the minimum zoom level of the displayed map.
+   */
+  public static final double NAVIGATION_MINIMUM_MAP_ZOOM = 7d;
+
+  public static final double NAVIGATION_MAXIMUM_MAP_ZOOM = 18d;
+
+  /**
+   * Maximum duration of the zoom/tilt adjustment animation while tracking.
+   */
+  public static final long NAVIGATION_MAX_CAMERA_ADJUSTMENT_ANIMATION_DURATION = 1500L;
+
+  /**
+   * NavigationLauncher key for storing initial map position in Intent
+   */
+  public static final String NAVIGATION_VIEW_INITIAL_MAP_POSITION = "navigation_view_initial_map_position";
+
+  /**
+   * Minimum duration of the zoom adjustment animation while tracking.
+   */
+  public static final long NAVIGATION_MIN_CAMERA_ZOOM_ADJUSTMENT_ANIMATION_DURATION = 300L;
+
+  /**
+   * Minimum duration of the tilt adjustment animation while tracking.
+   */
+  public static final long NAVIGATION_MIN_CAMERA_TILT_ADJUSTMENT_ANIMATION_DURATION = 750L;
+
+  /**
    * If default voice instructions are enabled, this identifier will be used to differentiate them
    * from custom milestones in the
    * {@link com.mapbox.services.android.navigation.v5.milestone.MilestoneEventListener}.
@@ -225,24 +252,25 @@ public final class NavigationConstants {
   public static final String STEP_MANEUVER_TYPE_ROUNDABOUT = "roundabout";
   public static final String STEP_MANEUVER_TYPE_ROTARY = "rotary";
   public static final String STEP_MANEUVER_TYPE_EXIT_ROTARY = "exit rotary";
+  public static final String STEP_MANEUVER_TYPE_EXIT_ROUNDABOUT = "exit roundabout";
   public static final String STEP_MANEUVER_TYPE_ROUNDABOUT_TURN = "roundabout turn";
   public static final String STEP_MANEUVER_TYPE_NOTIFICATION = "notification";
 
   @StringDef( {
-    STEP_MANEUVER_TYPE_TURN,
-    STEP_MANEUVER_TYPE_NEW_NAME,
-    STEP_MANEUVER_TYPE_DEPART,
-    STEP_MANEUVER_TYPE_ARRIVE,
-    STEP_MANEUVER_TYPE_MERGE,
-    STEP_MANEUVER_TYPE_ON_RAMP,
-    STEP_MANEUVER_TYPE_OFF_RAMP,
-    STEP_MANEUVER_TYPE_FORK,
-    STEP_MANEUVER_TYPE_END_OF_ROAD,
-    STEP_MANEUVER_TYPE_CONTINUE,
-    STEP_MANEUVER_TYPE_ROUNDABOUT,
-    STEP_MANEUVER_TYPE_ROTARY,
-    STEP_MANEUVER_TYPE_ROUNDABOUT_TURN,
-    STEP_MANEUVER_TYPE_NOTIFICATION
+          STEP_MANEUVER_TYPE_TURN,
+          STEP_MANEUVER_TYPE_NEW_NAME,
+          STEP_MANEUVER_TYPE_DEPART,
+          STEP_MANEUVER_TYPE_ARRIVE,
+          STEP_MANEUVER_TYPE_MERGE,
+          STEP_MANEUVER_TYPE_ON_RAMP,
+          STEP_MANEUVER_TYPE_OFF_RAMP,
+          STEP_MANEUVER_TYPE_FORK,
+          STEP_MANEUVER_TYPE_END_OF_ROAD,
+          STEP_MANEUVER_TYPE_CONTINUE,
+          STEP_MANEUVER_TYPE_ROUNDABOUT,
+          STEP_MANEUVER_TYPE_ROTARY,
+          STEP_MANEUVER_TYPE_ROUNDABOUT_TURN,
+          STEP_MANEUVER_TYPE_NOTIFICATION
   })
   public @interface ManeuverType {
   }
@@ -258,14 +286,14 @@ public final class NavigationConstants {
   public static final String STEP_MANEUVER_MODIFIER_SHARP_LEFT = "sharp left";
 
   @StringDef( {
-    STEP_MANEUVER_MODIFIER_UTURN,
-    STEP_MANEUVER_MODIFIER_SHARP_RIGHT,
-    STEP_MANEUVER_MODIFIER_RIGHT,
-    STEP_MANEUVER_MODIFIER_SLIGHT_RIGHT,
-    STEP_MANEUVER_MODIFIER_STRAIGHT,
-    STEP_MANEUVER_MODIFIER_SLIGHT_LEFT,
-    STEP_MANEUVER_MODIFIER_LEFT,
-    STEP_MANEUVER_MODIFIER_SHARP_LEFT
+          STEP_MANEUVER_MODIFIER_UTURN,
+          STEP_MANEUVER_MODIFIER_SHARP_RIGHT,
+          STEP_MANEUVER_MODIFIER_RIGHT,
+          STEP_MANEUVER_MODIFIER_SLIGHT_RIGHT,
+          STEP_MANEUVER_MODIFIER_STRAIGHT,
+          STEP_MANEUVER_MODIFIER_SLIGHT_LEFT,
+          STEP_MANEUVER_MODIFIER_LEFT,
+          STEP_MANEUVER_MODIFIER_SHARP_LEFT
   })
   public @interface ManeuverModifier {
   }
@@ -286,11 +314,11 @@ public final class NavigationConstants {
   public static final int ROUNDING_INCREMENT_ONE_HUNDRED = 100;
 
   @IntDef( {
-    ROUNDING_INCREMENT_FIVE,
-    ROUNDING_INCREMENT_TEN,
-    ROUNDING_INCREMENT_TWENTY_FIVE,
-    ROUNDING_INCREMENT_FIFTY,
-    ROUNDING_INCREMENT_ONE_HUNDRED
+          ROUNDING_INCREMENT_FIVE,
+          ROUNDING_INCREMENT_TEN,
+          ROUNDING_INCREMENT_TWENTY_FIVE,
+          ROUNDING_INCREMENT_FIFTY,
+          ROUNDING_INCREMENT_ONE_HUNDRED
   })
   public @interface RoundingIncrement {
   }

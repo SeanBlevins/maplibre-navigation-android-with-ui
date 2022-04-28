@@ -1,14 +1,3 @@
-<div align="center">
-  <img src="https://github.com/flitsmeister/flitsmeister-navigation-android/blob/master/.github/splash-image-android.png" alt="Flitsmeister Navigation Android Splash">
-</div>
-<br>
-<p align="center">
-  <a href="https://jitpack.io/#flitsmeister/flitsmeister-navigation-android">
-    <img src="https://jitpack.io/v/flitsmeister/flitsmeister-navigation-android.svg"
-         alt="Jitpack">
-  </a>
-</p>
-
 The Maplibre Navigation SDK for Android is built on a fork of the [Mapbox Navigation SDK v0.19](https://github.com/flitsmeister/flitsmeister-navigation-android/tree/v0.19.0) which is build on top of the [Mapbox Directions API](https://www.mapbox.com/directions) and contains logic needed to get timed navigation instructions.
 
 With this SDK you can implement turn by turn navigation in your own Android app while hosting your own Map tiles and Directions API.
