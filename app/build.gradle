@@ -41,7 +41,8 @@ android {
 }
 
 dependencies {
-    implementation project(':libandroid-navigation-ui')
+    api project(':libandroid-navigation-ui')
+    api project(':libandroid-navigation')
 
     // Support libraries
     implementation dependenciesList.supportAppcompatV7
