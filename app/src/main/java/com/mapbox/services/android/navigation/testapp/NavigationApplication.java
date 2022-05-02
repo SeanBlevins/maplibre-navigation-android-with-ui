@@ -22,13 +22,7 @@ public class NavigationApplication extends Application {
       Timber.plant(new Timber.DebugTree());
     }
 
-    // Set access token
-    String mapboxAccessToken = Utils.getMapboxAccessToken(getApplicationContext());
-    if (TextUtils.isEmpty(mapboxAccessToken) || mapboxAccessToken.equals(DEFAULT_MAPBOX_ACCESS_TOKEN)) {
-      Log.w(LOG_TAG, "Warning: access token isn't set.");
-    }
-
-    Mapbox.getInstance(getApplicationContext(), mapboxAccessToken);
+    Mapbox.getInstance(getApplicationContext());
   }
 
 }

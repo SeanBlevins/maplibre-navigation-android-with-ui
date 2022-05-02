@@ -83,7 +83,7 @@ public class NavigationViewModel extends AndroidViewModel {
   private RouteUtils routeUtils;
   private LocaleUtils localeUtils;
   private DistanceFormatter distanceFormatter;
-  private String accessToken;
+  //private String accessToken;
   @NavigationTimeFormat.Type
   private int timeFormatType;
   private boolean isRunning;
@@ -91,7 +91,7 @@ public class NavigationViewModel extends AndroidViewModel {
 
   public NavigationViewModel(Application application) {
     super(application);
-    this.accessToken = Mapbox.getAccessToken();
+    //this.accessToken = Mapbox.getAccessToken();
     initializeConnectivityManager(application);
     initializeNavigationRouteEngine();
     initializeNavigationLocationEngine();
@@ -229,7 +229,7 @@ public class NavigationViewModel extends AndroidViewModel {
   }
 
   private void initializeNavigationRouteEngine() {
-    routeFetcher = new ViewRouteFetcher(getApplication(), accessToken, routeEngineListener);
+    routeFetcher = new ViewRouteFetcher(getApplication(), null, routeEngineListener);
   }
 
   private void initializeNavigationLocationEngine() {
@@ -282,7 +282,7 @@ public class NavigationViewModel extends AndroidViewModel {
   private void initializeVoiceInstructionLoader() {
     Cache cache = new Cache(new File(getApplication().getCacheDir(), OKHTTP_INSTRUCTION_CACHE),
       TEN_MEGABYTE_CACHE_SIZE);
-    voiceInstructionLoader = new VoiceInstructionLoader(getApplication(), accessToken, cache);
+    voiceInstructionLoader = new VoiceInstructionLoader(getApplication(), null, cache);
   }
 
   private void initializeVoiceInstructionCache() {
@@ -302,7 +302,7 @@ public class NavigationViewModel extends AndroidViewModel {
   }
 
   private void initializeNavigation(Context context, MapboxNavigationOptions options, LocationEngine locationEngine) {
-    navigation = new MapboxNavigation(context, accessToken, options, locationEngine);
+    navigation = new MapboxNavigation(context, null, options, locationEngine);
     addNavigationListeners();
   }
 

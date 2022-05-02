@@ -90,8 +90,8 @@ class MockNavigationActivity : AppCompatActivity(), OnMapReadyCallback,
                 .navigationNotification(customNotification)
                 .build()
 
-        Mapbox.getAccessToken()?.let {
-            navigation = MapboxNavigation(this, it, options)
+
+            navigation = MapboxNavigation(this, null.toString(), options)
 
             navigation.addMilestone(RouteMilestone.Builder()
                     .setIdentifier(BEGIN_ROUTE_MILESTONE)
@@ -104,7 +104,7 @@ class MockNavigationActivity : AppCompatActivity(), OnMapReadyCallback,
                             )
                     ).build())
             customNotification.register(MyBroadcastReceiver(navigation), context)
-        }
+
 
         startRouteButton?.setOnClickListener {
             route?.let { route ->
@@ -204,14 +204,13 @@ class MockNavigationActivity : AppCompatActivity(), OnMapReadyCallback,
 
     private fun calculateRoute() {
         val userLocation = locationEngine.lastLocation
-        val accesstoken = Mapbox.getAccessToken()
         val destination = destination
         if (userLocation == null) {
             Timber.d("calculateRoute: User location is null, therefore, origin can't be set.")
             return
         }
 
-        if (destination == null || accesstoken == null) {
+        if (destination == null) {
             return
         }
 
