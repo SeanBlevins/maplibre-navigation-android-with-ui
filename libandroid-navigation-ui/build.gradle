@@ -51,6 +51,10 @@ android {
 dependencies {
   // Navigation SDK
   api project(':libandroid-navigation')
+
+  api dependenciesList.mapLibreServices
+  api dependenciesList.mapLibreTurf
+  api dependenciesList.mapLibre
   implementation dependenciesList.mapLibreAnnotations
 
   // Support libraries
