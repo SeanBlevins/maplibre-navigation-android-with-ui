@@ -41,7 +41,6 @@ android {
 }
 
 dependencies {
-    api project(':libandroid-navigation-ui')
     api project(':libandroid-navigation')
 
     // Support libraries
@@ -76,7 +75,7 @@ dependencies {
     })
     implementation "androidx.core:core-ktx:1.7.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"
-  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     implementation 'androidx.multidex:multidex:2.0.1'
 }

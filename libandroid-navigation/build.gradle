@@ -47,14 +47,30 @@ dependencies {
     api dependenciesList.mapLibreServices
     api dependenciesList.mapLibreTurf
     api dependenciesList.mapLibre
+    implementation dependenciesList.mapLibreAnnotations
 
     implementation dependenciesList.gmsLocation
 
     // Support
     implementation dependenciesList.supportAppcompatV7
+    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation dependenciesList.supportConstraintLayout
+    implementation dependenciesList.supportCardView
 
     // Logging
     implementation dependenciesList.timber
+
+    // Architecture libraries
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    annotationProcessor 'androidx.lifecycle:lifecycle-compiler:2.4.1'
+
+    // AutoValues
+    annotationProcessor dependenciesList.autoValue
+    compileOnly dependenciesList.autoValue
+
+    // Picasso
+    implementation dependenciesList.picasso
 
     // Unit testing
     testImplementation dependenciesList.junit

@@ -74,4 +74,8 @@
             translatable="false">navigation_view_instance_state</string>
     <string name="navigation_running"
             translatable="false">navigation_running</string>
+
+    <string name="report_problem">Report Problem</string>
+    <string name="feedback_submitted">Feedback Submitted</string>
+
 </resources>
