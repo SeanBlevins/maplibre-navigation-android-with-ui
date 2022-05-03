@@ -229,7 +229,7 @@ public class NavigationViewModel extends AndroidViewModel {
   }
 
   private void initializeNavigationRouteEngine() {
-    routeFetcher = new ViewRouteFetcher(getApplication(), null, routeEngineListener);
+    routeFetcher = new ViewRouteFetcher(getApplication(), "pk.dummy", routeEngineListener);
   }
 
   private void initializeNavigationLocationEngine() {
@@ -282,7 +282,7 @@ public class NavigationViewModel extends AndroidViewModel {
   private void initializeVoiceInstructionLoader() {
     Cache cache = new Cache(new File(getApplication().getCacheDir(), OKHTTP_INSTRUCTION_CACHE),
       TEN_MEGABYTE_CACHE_SIZE);
-    voiceInstructionLoader = new VoiceInstructionLoader(getApplication(), null, cache);
+    voiceInstructionLoader = new VoiceInstructionLoader(getApplication(), "pk.dummy", cache);
   }
 
   private void initializeVoiceInstructionCache() {
@@ -302,7 +302,7 @@ public class NavigationViewModel extends AndroidViewModel {
   }
 
   private void initializeNavigation(Context context, MapboxNavigationOptions options, LocationEngine locationEngine) {
-    navigation = new MapboxNavigation(context, null, options, locationEngine);
+    navigation = new MapboxNavigation(context, "pk.dummy", options, locationEngine);
     addNavigationListeners();
   }
 
