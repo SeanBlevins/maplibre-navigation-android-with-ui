@@ -35,17 +35,14 @@ class AndroidSpeechPlayer implements SpeechPlayer {
    * @since 0.6.0
    */
   AndroidSpeechPlayer(Context context, final String language, final SpeechListener speechListener) {
-    textToSpeech = new TextToSpeech(context, new TextToSpeech.OnInitListener() {
-      @Override
-      public void onInit(int status) {
-        boolean ableToInitialize = status == TextToSpeech.SUCCESS && language != null;
-        if (!ableToInitialize) {
-          Timber.e("There was an error initializing native TTS");
-          return;
-        }
-        setSpeechListener(speechListener);
-        initializeWithLanguage(new Locale(language));
+    textToSpeech = new TextToSpeech(context, status -> {
+      boolean ableToInitialize = status == TextToSpeech.SUCCESS && language != null;
+      if (!ableToInitialize) {
+        Timber.e("There was an error initializing native TTS");
+        return;
       }
+      setSpeechListener(speechListener);
+      initializeWithLanguage(new Locale(language));
     });
   }
 

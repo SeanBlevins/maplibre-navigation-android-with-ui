@@ -142,7 +142,10 @@ class MapboxNavigationNotification implements NavigationNotification {
     PackageManager pm = context.getPackageManager();
     Intent intent = pm.getLaunchIntentForPackage(context.getPackageName());
     intent.setPackage(null);
-    return PendingIntent.getActivity(context, 0, intent, 0);
+    return PendingIntent.getActivity(context, 0, intent,
+            (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                    ? PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT
+                    : PendingIntent.FLAG_UPDATE_CURRENT);
   }
 
   private void registerReceiver(Context context) {
