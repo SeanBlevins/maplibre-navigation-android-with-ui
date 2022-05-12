@@ -238,7 +238,10 @@ class MapboxNavigationNotification implements NavigationNotification {
 
   private PendingIntent createPendingCloseIntent(Context context) {
     Intent endNavigationBtn = new Intent(END_NAVIGATION_ACTION);
-    return PendingIntent.getBroadcast(context, 0, endNavigationBtn, 0);
+    return PendingIntent.getBroadcast(context, 0, endNavigationBtn,
+            (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                    ? PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT
+                    : PendingIntent.FLAG_UPDATE_CURRENT);
   }
 
   private void onEndNavigationBtnClick() {
